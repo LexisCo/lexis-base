@@ -1,49 +1,40 @@
 {
-  "name": "nodejs-docs-samples",
-  "description": "Node.js samples found on https://cloud.google.com",
+  "name": "appengine-hello-world",
+  "description": "Simple Hello World Node.js sample for Google App Engine Standard Environment.",
   "version": "0.0.1",
+  "private": true,
   "license": "Apache-2.0",
   "author": "Google Inc.",
-  "engines": {
-    "node": ">=4.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/GoogleCloudPlatform/nodejs-docs-samples.git"
   },
-  "main": "src/index.js",
-  "private": true,
-  "semistandard": {
-    "globals": [
-      "rm",
-      "exec",
-      "cd",
-      "ls"
-    ],
-    "ignore": [
-      "appengine/loopback",
-      "appengine/parse-server/cloud/main.js",
-      "**/node_modules/**",
-      "coverage"
-    ]
+  "engines": {
+    "node": "8.x.x"
   },
   "scripts": {
-    "check": "yarn check --strict-semver --integrity",
+    "deploy": "gcloud app deploy",
+    "start": "node app.js",
     "lint": "repo-tools lint",
-    "generate": "node ./scripts/generate",
-    "pretest": "npm run lint && node ./scripts/clean coverage",
-    "unit-cover": "nyc --cache npm test && nyc report --reporter=html",
-    "system-cover": "nyc --cache npm run system-test && nyc report --reporter=html",
-    "test": "npm run unit-test && npm run system-test",
-    "cover": "nyc --cache npm run test && nyc report --reporter=html",
-    "update-dependencies": "./scripts/update-dependencies.sh"
+    "pretest": "npm run lint",
+    "system-test": "repo-tools test app",
+    "test": "npm run system-test",
+    "e2e-test": "repo-tools test deploy"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
   },
   "devDependencies": {
-    "@google-cloud/nodejs-repo-tools": "^2.3.3",
-    "@google-cloud/storage": "1.7.0",
-    "ava": "0.25.0",
-    "nyc": "13.0.1",
-    "semistandard": "^12.0.1",
-    "shelljs": "0.8.2"
+    "@google-cloud/nodejs-repo-tools": "^2.3.0",
+    "semistandard": "^12.0.1"
+  },
+  "cloud-repo-tools": {
+    "test": {
+      "app": {
+        "msg": "Hello, world!"
+      }
+    },
+    "requiresKeyFile": true,
+    "requiresProjectId": true
   }
 }
