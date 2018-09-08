@@ -21,8 +21,14 @@ const app = express();
 
 // Start the server
 app.get('/', (req, res) => {
-  res.status(200).send('Hello, World GCP!').end();
+  res.status(200).send('Hi React, this is Node!').end();
 });
+
+// API Start
+app.get('/api/start', (req, res) => {
+	res.send({ express: 'Hi this is Express' });
+});
+
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
