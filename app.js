@@ -21,7 +21,7 @@ const app = express();
 
 // Start the server
 app.get('/', (req, res) => {
-  res.status(200).send('Hello, World!').end();
+  res.status(200).send('Hello, World GCP!').end();
 });
 
 app.listen(PORT, () => {
